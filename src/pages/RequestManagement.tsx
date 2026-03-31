@@ -23,6 +23,14 @@ import {
 } from '@/data/mockCustomer';
 
 const RequestManagement = () => {
+  return (
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 py-6">
+      <RequestManagementContent />
+    </div>
+  );
+};
+
+const RequestManagementContent = () => {
   const [tickets, setTickets] = useState<Ticket[]>(mockTickets);
   const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
