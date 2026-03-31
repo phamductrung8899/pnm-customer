@@ -1,41 +1,70 @@
-import type {
-  CustomerProfile,
-  DailyCallData,
-  MonthlyCallData,
-  NumberTrafficDetail,
-  RevenueComponent,
-  MonthlyRevenue,
-  NumberCostDetail,
-  Ticket,
-  FAQItem,
-} from '@/types/customer';
+import type { CustomerData, DailyCallData, MonthlyCallData, NumberTrafficDetail, RevenueComponent, MonthlyRevenue, NumberCostDetail, Ticket, FAQItem } from '@/types/customer';
 
-export const mockCustomer: CustomerProfile = {
-  id: 'CUST-001',
-  companyName: 'Công ty TNHH ABC Solutions',
-  taxCode: '0123456789',
-  representativeName: 'Nguyễn Văn An',
-  email: 'contact@abcsolutions.vn',
-  phone: '0901234567',
-  address: '123 Nguyễn Huệ, Quận 1, TP. Hồ Chí Minh',
-  contractNumber: 'HD-2024-0456',
-  contractDate: '2024-01-15',
-  packageName: 'Enterprise Plus',
-  phoneNumbers: [
-    { id: '1', originalNumber: '02871001001', maskedNumber: '1900xxxx01', status: 'active', assignedDate: '2024-01-15', monthlyFee: 500000 },
-    { id: '2', originalNumber: '02871001002', maskedNumber: '1900xxxx02', status: 'active', assignedDate: '2024-02-01', monthlyFee: 500000 },
-    { id: '3', originalNumber: '02871001003', maskedNumber: '1900xxxx03', status: 'active', assignedDate: '2024-03-10', monthlyFee: 500000 },
-    { id: '4', originalNumber: '02871001004', maskedNumber: '1900xxxx04', status: 'inactive', assignedDate: '2024-04-01', monthlyFee: 500000 },
-    { id: '5', originalNumber: '02871001005', maskedNumber: '1900xxxx05', status: 'active', assignedDate: '2024-05-15', monthlyFee: 500000 },
+export const mockCustomer: CustomerData = {
+  general: {
+    companyName: 'Công ty CP Công nghệ ABC',
+    customerId: 'KH-2024-00158',
+    businessType: 'Công ty Cổ phần',
+    establishedDate: '15/03/2018',
+    nationality: 'Việt Nam',
+    address: 'Tầng 12, Tòa nhà Landmark, 72 Nguyễn Trãi, Thanh Xuân, Hà Nội',
+  },
+  legal: {
+    businessLicenseNo: '0108456789',
+    licenseIssuedDate: '20/03/2018',
+    licenseIssuedPlace: 'Sở KH&ĐT Thành phố Hà Nội',
+    taxCode: '0108456789',
+    registeredAddress: 'Tầng 12, Tòa nhà Landmark, 72 Nguyễn Trãi, Thanh Xuân, Hà Nội',
+    representative: {
+      fullName: 'Nguyễn Văn An',
+      position: 'Giám đốc điều hành',
+      idNumber: '001099012345',
+      idIssuedDate: '10/05/2020',
+      idIssuedPlace: 'Cục Cảnh sát QLHC về TTXH',
+    },
+    representativeDocuments: [
+      { id: '1', name: 'CCCD_NguyenVanAn.pdf', url: '#', uploadedAt: '01/06/2024', size: '2.1 MB' },
+    ],
+    authorizationDocuments: [
+      { id: '2', name: 'GiayUyQuyen_2024.pdf', url: '#', uploadedAt: '01/06/2024', size: '1.5 MB' },
+    ],
+  },
+  contact: {
+    address: 'Tầng 12, Tòa nhà Landmark, 72 Nguyễn Trãi, Thanh Xuân, Hà Nội',
+    phone: '024 3999 8888',
+    email: 'contact@abctech.vn',
+    contactPerson: 'Trần Thị Bích Ngọc',
+  },
+  serviceTerms: {
+    serviceScope: 'Dịch vụ Phone Number Masking — Cuộc gọi ẩn danh cho nền tảng thương mại điện tử',
+    securityTermsUrl: 'https://example.com/dieu-khoan-bao-mat',
+    dataProcessingTermsUrl: 'https://example.com/xu-ly-dlcn',
+  },
+  serviceContracts: [
+    { id: '3', name: 'HopDong_DichVu_2024.pdf', url: '#', uploadedAt: '15/06/2024', size: '3.2 MB' },
+    { id: '4', name: 'PhuLuc_HopDong_01.pdf', url: '#', uploadedAt: '20/06/2024', size: '1.1 MB' },
   ],
+  numberContracts: [
+    { id: '5', name: 'HopDong_DauSo_2024.pdf', url: '#', uploadedAt: '15/06/2024', size: '2.8 MB' },
+  ],
+  payment: {
+    companyName: 'Công ty CP Công nghệ ABC',
+    taxCode: '0108456789',
+    invoiceAddress: 'Tầng 12, Tòa nhà Landmark, 72 Nguyễn Trãi, Thanh Xuân, Hà Nội',
+    invoiceEmail: 'ketoan@abctech.vn',
+    billingCycle: 'Hàng tháng',
+    paymentMethod: 'Chuyển khoản ngân hàng',
+  },
+  onboardingStatus: 'completed',
+  subscriptionStatus: 'active',
 };
 
-export const mockDailyCallData: DailyCallData[] = Array.from({ length: 30 }, (_, i) => ({
-  date: `${i + 1}/03`,
-  inbound: Math.floor(Math.random() * 150) + 50,
-  outbound: Math.floor(Math.random() * 100) + 30,
-  total: 0,
-})).map(d => ({ ...d, total: d.inbound + d.outbound }));
+// Report mock data
+export const mockDailyCallData: DailyCallData[] = Array.from({ length: 30 }, (_, i) => {
+  const inbound = Math.floor(Math.random() * 150) + 50;
+  const outbound = Math.floor(Math.random() * 100) + 30;
+  return { date: `${i + 1}/03`, inbound, outbound, total: inbound + outbound };
+});
 
 export const mockMonthlyCallData: MonthlyCallData[] = [
   { month: '10/2024', inbound: 3200, outbound: 2100, total: 5300 },
@@ -80,13 +109,9 @@ export const mockNumberCosts: NumberCostDetail[] = [
 
 export const mockTickets: Ticket[] = [
   {
-    id: 'TK-2025-001',
-    category: 'legal_update',
-    title: 'Cập nhật giấy phép kinh doanh mới',
+    id: 'TK-2025-001', category: 'legal_update', title: 'Cập nhật giấy phép kinh doanh mới',
     description: 'Công ty vừa gia hạn giấy phép kinh doanh, cần cập nhật lại thông tin pháp lý trên hệ thống.',
-    status: 'resolved',
-    createdAt: '2025-02-15T09:30:00',
-    updatedAt: '2025-02-18T14:00:00',
+    status: 'resolved', createdAt: '2025-02-15T09:30:00', updatedAt: '2025-02-18T14:00:00',
     attachments: ['giay_phep_kd_2025.pdf'],
     replies: [
       { id: 'r1', sender: 'support', content: 'Chúng tôi đã nhận được yêu cầu. Đang xác minh tài liệu.', timestamp: '2025-02-15T10:00:00' },
@@ -94,37 +119,25 @@ export const mockTickets: Ticket[] = [
     ],
   },
   {
-    id: 'TK-2025-002',
-    category: 'number_request',
-    title: 'Yêu cầu bổ sung 3 số điện thoại mới',
+    id: 'TK-2025-002', category: 'number_request', title: 'Yêu cầu bổ sung 3 số điện thoại mới',
     description: 'Do mở rộng hoạt động, chúng tôi cần bổ sung thêm 3 số điện thoại masking cho chi nhánh Hà Nội.',
-    status: 'received',
-    createdAt: '2025-03-01T11:00:00',
-    updatedAt: '2025-03-02T08:30:00',
+    status: 'received', createdAt: '2025-03-01T11:00:00', updatedAt: '2025-03-02T08:30:00',
     attachments: [],
     replies: [
       { id: 'r3', sender: 'support', content: 'Yêu cầu đã được tiếp nhận. Đội ngũ kỹ thuật sẽ xử lý trong 2-3 ngày làm việc.', timestamp: '2025-03-02T08:30:00' },
     ],
   },
   {
-    id: 'TK-2025-003',
-    category: 'error_complaint',
-    title: 'Lỗi không kết nối được cuộc gọi trên số 1900xxxx03',
+    id: 'TK-2025-003', category: 'error_complaint', title: 'Lỗi không kết nối được cuộc gọi trên số 1900xxxx03',
     description: 'Từ sáng nay, số 1900xxxx03 không thể nhận cuộc gọi. Các số khác hoạt động bình thường.',
-    status: 'pending',
-    createdAt: '2025-03-10T07:45:00',
-    updatedAt: '2025-03-10T07:45:00',
+    status: 'pending', createdAt: '2025-03-10T07:45:00', updatedAt: '2025-03-10T07:45:00',
     attachments: ['log_error_screenshot.png'],
     replies: [],
   },
   {
-    id: 'TK-2025-004',
-    category: 'plan_update',
-    title: 'Nâng cấp gói cước lên Premium',
+    id: 'TK-2025-004', category: 'plan_update', title: 'Nâng cấp gói cước lên Premium',
     description: 'Chúng tôi muốn nâng cấp từ gói Enterprise Plus lên Premium để có thêm tính năng ghi âm cuộc gọi.',
-    status: 'closed',
-    createdAt: '2025-01-20T14:00:00',
-    updatedAt: '2025-01-25T16:30:00',
+    status: 'closed', createdAt: '2025-01-20T14:00:00', updatedAt: '2025-01-25T16:30:00',
     attachments: [],
     replies: [
       { id: 'r4', sender: 'support', content: 'Yêu cầu nâng cấp đã được xử lý. Gói mới sẽ có hiệu lực từ 01/02/2025.', timestamp: '2025-01-23T10:00:00' },
