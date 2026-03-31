@@ -1,26 +1,77 @@
-export interface PhoneNumber {
+export interface AttachedFile {
   id: string;
-  originalNumber: string;
-  maskedNumber: string;
-  status: 'active' | 'inactive' | 'pending';
-  assignedDate: string;
-  monthlyFee: number;
+  name: string;
+  url: string;
+  uploadedAt: string;
+  size?: string;
 }
 
-export interface CustomerProfile {
-  id: string;
+export interface Representative {
+  fullName: string;
+  position: string;
+  idNumber: string;
+  idIssuedDate: string;
+  idIssuedPlace: string;
+}
+
+export interface CustomerGeneral {
+  companyName: string;
+  customerId: string;
+  businessType: string;
+  establishedDate: string;
+  nationality: string;
+  address: string;
+}
+
+export interface CustomerLegal {
+  businessLicenseNo: string;
+  licenseIssuedDate: string;
+  licenseIssuedPlace: string;
+  taxCode: string;
+  registeredAddress: string;
+  representative: Representative;
+  representativeDocuments: AttachedFile[];
+  authorizationDocuments: AttachedFile[];
+}
+
+export interface ContactAddress {
+  address: string;
+  phone: string;
+  email: string;
+  contactPerson: string;
+}
+
+export interface ServiceTerms {
+  serviceScope: string;
+  securityTermsUrl: string;
+  dataProcessingTermsUrl: string;
+}
+
+export interface PaymentInfo {
   companyName: string;
   taxCode: string;
-  representativeName: string;
-  email: string;
-  phone: string;
-  address: string;
-  contractNumber: string;
-  contractDate: string;
-  packageName: string;
-  phoneNumbers: PhoneNumber[];
+  invoiceAddress: string;
+  invoiceEmail: string;
+  billingCycle: string;
+  paymentMethod: string;
 }
 
+export type OnboardingStatus = 'completed' | 'in_progress' | 'pending';
+export type SubscriptionStatus = 'active' | 'suspended' | 'inactive';
+
+export interface CustomerData {
+  general: CustomerGeneral;
+  legal: CustomerLegal;
+  contact: ContactAddress;
+  serviceTerms: ServiceTerms;
+  serviceContracts: AttachedFile[];
+  numberContracts: AttachedFile[];
+  payment: PaymentInfo;
+  onboardingStatus: OnboardingStatus;
+  subscriptionStatus: SubscriptionStatus;
+}
+
+// Report types
 export interface DailyCallData {
   date: string;
   inbound: number;
@@ -68,6 +119,7 @@ export interface NumberCostDetail {
   total: number;
 }
 
+// Ticket types
 export type TicketCategory =
   | 'legal_update'
   | 'plan_update'

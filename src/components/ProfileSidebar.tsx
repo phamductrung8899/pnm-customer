@@ -1,39 +1,82 @@
-import { mockCustomer } from '@/data/mockCustomer';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Building2, FileText, Phone, Mail, MapPin } from 'lucide-react';
+import {
+  Building2,
+  Scale,
+  MapPin,
+  ShieldCheck,
+  FileText,
+  Phone,
+  CreditCard,
+} from 'lucide-react';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from '@/components/ui/sidebar';
+import { cn } from '@/lib/utils';
 
-const ProfileSidebar = () => {
-  const c = mockCustomer;
+export type ProfileSection =
+  | 'general'
+  | 'legal'
+  | 'contact'
+  | 'terms'
+  | 'service-contract'
+  | 'number-contract'
+  | 'payment';
+
+interface ProfileSidebarProps {
+  activeSection: ProfileSection;
+  onSectionChange: (section: ProfileSection) => void;
+}
+
+const sidebarItems: { id: ProfileSection; label: string; icon: React.ElementType }[] = [
+  { id: 'general', label: 'Thông tin chung', icon: Building2 },
+  { id: 'legal', label: 'Thông tin pháp lý', icon: Scale },
+  { id: 'contact', label: 'Địa chỉ liên hệ', icon: MapPin },
+  { id: 'terms', label: 'Điều khoản & DLCN', icon: ShieldCheck },
+  { id: 'service-contract', label: 'HĐ sử dụng dịch vụ', icon: FileText },
+  { id: 'number-contract', label: 'HĐ đăng ký đầu số', icon: Phone },
+  { id: 'payment', label: 'Thông tin thanh toán', icon: CreditCard },
+];
+
+export function ProfileSidebar({ activeSection, onSectionChange }: ProfileSidebarProps) {
+  const { state } = useSidebar();
+  const collapsed = state === 'collapsed';
+
   return (
-    <Card>
-      <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2 text-base">
-          <Building2 className="h-4 w-4 text-primary" />
-          Thông tin khách hàng
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-3 text-sm">
-        <p className="font-semibold">{c.companyName}</p>
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <FileText className="h-3.5 w-3.5" /> MST: {c.taxCode}
-        </div>
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <Phone className="h-3.5 w-3.5" /> {c.phone}
-        </div>
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <Mail className="h-3.5 w-3.5" /> {c.email}
-        </div>
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <MapPin className="h-3.5 w-3.5" /> {c.address}
-        </div>
-        <div className="border-t pt-3">
-          <p className="text-muted-foreground">Hợp đồng: <span className="font-medium text-foreground">{c.contractNumber}</span></p>
-          <p className="text-muted-foreground">Gói cước: <Badge variant="secondary">{c.packageName}</Badge></p>
-        </div>
-      </CardContent>
-    </Card>
+    <Sidebar collapsible="icon" className="border-r">
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Hồ sơ khách hàng</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {sidebarItems.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <SidebarMenuItem key={item.id}>
+                    <SidebarMenuButton
+                      onClick={() => onSectionChange(item.id)}
+                      tooltip={item.label}
+                      className={cn(
+                        'cursor-pointer transition-colors',
+                        isActive && 'bg-accent text-accent-foreground font-semibold'
+                      )}
+                    >
+                      <item.icon className="h-4 w-4" />
+                      {!collapsed && <span>{item.label}</span>}
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
   );
-};
-
-export default ProfileSidebar;
+}
