@@ -149,6 +149,10 @@ export interface Ticket {
   updatedAt: string;
   attachments: string[];
   replies: TicketReply[];
+  customerId?: string;
+  customerName?: string;
+  customerPhone?: string;
+  kpiDeadline?: string;
 }
 
 export interface FAQItem {
