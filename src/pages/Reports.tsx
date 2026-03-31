@@ -16,6 +16,14 @@ import {
 } from '@/data/mockCustomer';
 
 const Reports = () => {
+  return (
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 py-6">
+      <ReportsContent />
+    </div>
+  );
+};
+
+const ReportsContent = () => {
   const [trafficView, setTrafficView] = useState<'daily' | 'monthly'>('daily');
 
   const totalCalls = mockNumberTraffic.reduce((s, n) => s + n.inboundCalls + n.outboundCalls, 0);
