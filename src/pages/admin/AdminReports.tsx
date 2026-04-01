@@ -118,14 +118,12 @@ const AdminReports = () => {
             <CardContent>
               <Table>
                 <TableHeader>
-                  <TableRow>
-                    <TableHead>Số masking</TableHead>
-                    <TableHead>Số gốc</TableHead>
-                    <TableHead className="text-right">Gọi vào</TableHead>
-                    <TableHead className="text-right">Gọi ra</TableHead>
-                    <TableHead className="text-right">Tổng phút</TableHead>
-                    <TableHead className="text-right">Tỷ lệ TĐ</TableHead>
-                  </TableRow>
+                 <TableRow>
+                     <TableHead>Số masking</TableHead>
+                     <TableHead>Số gốc</TableHead>
+                     <TableHead className="text-right">Gọi vào</TableHead>
+                     <TableHead className="text-right">Tổng phút</TableHead>
+                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {mockNumberTraffic.map(n => (
