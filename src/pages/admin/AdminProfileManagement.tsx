@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { FileText, Download, Upload, Save, Pencil, X } from 'lucide-react';
+import { FileText, Download, Upload, Save, Pencil, X, Plus } from 'lucide-react';
 import { toast } from 'sonner';
 import { mockAdminCustomers, type AdminCustomer } from '@/data/mockAdminData';
 import type { CustomerData, AttachedFile } from '@/types/customer';
