@@ -37,22 +37,13 @@ const ReportsContent = () => {
       <h1 className="text-2xl font-bold">Báo cáo doanh thu</h1>
 
       {/* Overview cards */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardContent className="flex items-center gap-3 p-4">
             <div className="rounded-lg bg-primary/10 p-2"><PhoneCall className="h-5 w-5 text-primary" /></div>
             <div>
               <p className="text-xs text-muted-foreground">Tổng cuộc gọi tháng</p>
               <p className="text-xl font-bold">{totalCalls.toLocaleString()}</p>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="flex items-center gap-3 p-4">
-            <div className="rounded-lg bg-primary/10 p-2"><PhoneIncoming className="h-5 w-5 text-primary" /></div>
-            <div>
-              <p className="text-xs text-muted-foreground">Cuộc gọi vào</p>
-              <p className="text-xl font-bold">{mockNumberTraffic.reduce((s, n) => s + n.inboundCalls, 0).toLocaleString()}</p>
             </div>
           </CardContent>
         </Card>
