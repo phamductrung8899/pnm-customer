@@ -108,7 +108,6 @@ const AdminReports = () => {
                   <Tooltip />
                   <Legend />
                   <Bar dataKey="inbound" name="Gọi vào" fill="hsl(0, 72%, 51%)" radius={[2, 2, 0, 0]} />
-                  <Bar dataKey="outbound" name="Gọi ra" fill="hsl(0, 72%, 70%)" radius={[2, 2, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
