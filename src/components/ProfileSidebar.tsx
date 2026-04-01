@@ -4,8 +4,9 @@ import {
   MapPin,
   ShieldCheck,
   FileText,
-  Phone,
   CreditCard,
+  Users,
+  Settings,
 } from 'lucide-react';
 import {
   Sidebar,
@@ -21,32 +22,46 @@ import {
 import { cn } from '@/lib/utils';
 
 export type ProfileSection =
+  | 'customer-list'
   | 'general'
   | 'legal'
   | 'contact'
   | 'terms'
-  | 'service-contract'
-  | 'number-contract'
+  | 'contracts'
+  | 'service-management'
   | 'payment';
 
 interface ProfileSidebarProps {
   activeSection: ProfileSection;
   onSectionChange: (section: ProfileSection) => void;
+  variant?: 'customer' | 'admin';
 }
 
-const sidebarItems: { id: ProfileSection; label: string; icon: React.ElementType }[] = [
+const customerItems: { id: ProfileSection; label: string; icon: React.ElementType }[] = [
   { id: 'general', label: 'Thông tin chung', icon: Building2 },
   { id: 'legal', label: 'Thông tin pháp lý', icon: Scale },
   { id: 'contact', label: 'Địa chỉ liên hệ', icon: MapPin },
   { id: 'terms', label: 'Điều khoản & DLCN', icon: ShieldCheck },
-  { id: 'service-contract', label: 'HĐ sử dụng dịch vụ', icon: FileText },
-  { id: 'number-contract', label: 'HĐ đăng ký đầu số', icon: Phone },
+  { id: 'contracts', label: 'Hợp đồng', icon: FileText },
+  { id: 'service-management', label: 'Quản lý dịch vụ', icon: Settings },
   { id: 'payment', label: 'Thông tin thanh toán', icon: CreditCard },
 ];
 
-export function ProfileSidebar({ activeSection, onSectionChange }: ProfileSidebarProps) {
+const adminItems: { id: ProfileSection; label: string; icon: React.ElementType }[] = [
+  { id: 'customer-list', label: 'Danh sách khách hàng', icon: Users },
+  { id: 'general', label: 'Thông tin chung', icon: Building2 },
+  { id: 'legal', label: 'Thông tin pháp lý', icon: Scale },
+  { id: 'contact', label: 'Địa chỉ liên hệ', icon: MapPin },
+  { id: 'terms', label: 'Điều khoản & DLCN', icon: ShieldCheck },
+  { id: 'contracts', label: 'Hợp đồng', icon: FileText },
+  { id: 'service-management', label: 'Quản lý dịch vụ', icon: Settings },
+  { id: 'payment', label: 'Thông tin thanh toán', icon: CreditCard },
+];
+
+export function ProfileSidebar({ activeSection, onSectionChange, variant = 'customer' }: ProfileSidebarProps) {
   const { state } = useSidebar();
   const collapsed = state === 'collapsed';
+  const items = variant === 'admin' ? adminItems : customerItems;
 
   return (
     <Sidebar collapsible="icon" className="border-r">
@@ -55,7 +70,7 @@ export function ProfileSidebar({ activeSection, onSectionChange }: ProfileSideba
           <SidebarGroupLabel>Hồ sơ khách hàng</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {sidebarItems.map((item) => {
+              {items.map((item) => {
                 const isActive = activeSection === item.id;
                 return (
                   <SidebarMenuItem key={item.id}>

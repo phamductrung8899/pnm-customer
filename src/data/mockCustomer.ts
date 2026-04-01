@@ -57,6 +57,31 @@ export const mockCustomer: CustomerData = {
   },
   onboardingStatus: 'completed',
   subscriptionStatus: 'active',
+  serviceProfiles: [
+    {
+      id: 'sp-001',
+      name: 'Hồ sơ TMĐT - AX',
+      serviceModel: 'AX',
+      phoneNumbers: ['1900xxxx01', '1900xxxx02', '1900xxxx03'],
+      dailyCallLimit: 200,
+      apiKeys: [
+        { id: 'ak-1', key: 'pk_live_abc123456789', createdAt: '01/06/2024', status: 'active' },
+        { id: 'ak-2', key: 'pk_live_abc987654321', createdAt: '15/08/2024', status: 'active' },
+      ],
+      logRetentionDays: 90,
+    },
+    {
+      id: 'sp-002',
+      name: 'Hồ sơ Giao hàng - AXB',
+      serviceModel: 'AXB',
+      phoneNumbers: ['1900xxxx04', '1900xxxx05'],
+      dailyCallLimit: 150,
+      apiKeys: [
+        { id: 'ak-3', key: 'pk_live_def456789012', createdAt: '01/09/2024', status: 'active' },
+      ],
+      logRetentionDays: 60,
+    },
+  ],
 };
 
 // Report mock data
