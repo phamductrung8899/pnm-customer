@@ -50,7 +50,7 @@ export function ProfileSidebar({ activeSection, onSectionChange }: ProfileSideba
 
   return (
     <Sidebar collapsible="icon" className="border-r">
-      <SidebarContent>
+      <SidebarContent className="pt-16">
         <SidebarGroup>
           <SidebarGroupLabel>Hồ sơ khách hàng</SidebarGroupLabel>
           <SidebarGroupContent>

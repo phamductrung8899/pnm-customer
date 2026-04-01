@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { PhoneCall, PhoneIncoming, PhoneOutgoing, Clock, TrendingUp } from 'lucide-react';
+import { PhoneCall, Clock, TrendingUp } from 'lucide-react';
 import {
   mockDailyCallData,
   mockMonthlyCallData,
@@ -37,22 +37,13 @@ const ReportsContent = () => {
       <h1 className="text-2xl font-bold">Báo cáo doanh thu</h1>
 
       {/* Overview cards */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardContent className="flex items-center gap-3 p-4">
             <div className="rounded-lg bg-primary/10 p-2"><PhoneCall className="h-5 w-5 text-primary" /></div>
             <div>
               <p className="text-xs text-muted-foreground">Tổng cuộc gọi tháng</p>
               <p className="text-xl font-bold">{totalCalls.toLocaleString()}</p>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="flex items-center gap-3 p-4">
-            <div className="rounded-lg bg-primary/10 p-2"><PhoneIncoming className="h-5 w-5 text-primary" /></div>
-            <div>
-              <p className="text-xs text-muted-foreground">Cuộc gọi vào</p>
-              <p className="text-xl font-bold">{mockNumberTraffic.reduce((s, n) => s + n.inboundCalls, 0).toLocaleString()}</p>
             </div>
           </CardContent>
         </Card>
@@ -104,7 +95,6 @@ const ReportsContent = () => {
                   <Tooltip />
                   <Legend />
                   <Bar dataKey="inbound" name="Gọi vào" fill="hsl(0, 72%, 51%)" radius={[2, 2, 0, 0]} />
-                  <Bar dataKey="outbound" name="Gọi ra" fill="hsl(0, 72%, 70%)" radius={[2, 2, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
@@ -117,24 +107,20 @@ const ReportsContent = () => {
             <CardContent>
               <Table>
                 <TableHeader>
-                  <TableRow>
-                    <TableHead>Số masking</TableHead>
-                    <TableHead>Số gốc</TableHead>
-                    <TableHead className="text-right">Gọi vào</TableHead>
-                    <TableHead className="text-right">Gọi ra</TableHead>
-                    <TableHead className="text-right">Tổng phút</TableHead>
-                    <TableHead className="text-right">Tỷ lệ TĐ</TableHead>
-                  </TableRow>
+                 <TableRow>
+                     <TableHead>Số masking</TableHead>
+                     <TableHead>Số gốc</TableHead>
+                     <TableHead className="text-right">Gọi vào</TableHead>
+                     <TableHead className="text-right">Tổng phút</TableHead>
+                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {mockNumberTraffic.map(n => (
                     <TableRow key={n.phoneNumber}>
-                      <TableCell className="font-mono font-medium">{n.phoneNumber}</TableCell>
+                     <TableCell className="font-mono font-medium">{n.phoneNumber}</TableCell>
                       <TableCell className="font-mono">{n.originalNumber}</TableCell>
                       <TableCell className="text-right">{n.inboundCalls.toLocaleString()}</TableCell>
-                      <TableCell className="text-right">{n.outboundCalls.toLocaleString()}</TableCell>
                       <TableCell className="text-right">{n.totalMinutes.toLocaleString()}</TableCell>
-                      <TableCell className="text-right">{n.successRate}%</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
