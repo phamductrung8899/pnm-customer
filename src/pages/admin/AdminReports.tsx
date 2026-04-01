@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { PhoneCall, PhoneIncoming, Clock, TrendingUp, Building2 } from 'lucide-react';
+import { PhoneCall, Clock, TrendingUp, Building2 } from 'lucide-react';
 import { mockAdminCustomers } from '@/data/mockAdminData';
 import {
   mockDailyCallData,
