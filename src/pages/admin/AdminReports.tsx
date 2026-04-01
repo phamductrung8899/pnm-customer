@@ -128,12 +128,10 @@ const AdminReports = () => {
                 <TableBody>
                   {mockNumberTraffic.map(n => (
                     <TableRow key={n.phoneNumber}>
-                      <TableCell className="font-mono font-medium">{n.phoneNumber}</TableCell>
+                     <TableCell className="font-mono font-medium">{n.phoneNumber}</TableCell>
                       <TableCell className="font-mono">{n.originalNumber}</TableCell>
                       <TableCell className="text-right">{n.inboundCalls.toLocaleString()}</TableCell>
-                      <TableCell className="text-right">{n.outboundCalls.toLocaleString()}</TableCell>
                       <TableCell className="text-right">{n.totalMinutes.toLocaleString()}</TableCell>
-                      <TableCell className="text-right">{n.successRate}%</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

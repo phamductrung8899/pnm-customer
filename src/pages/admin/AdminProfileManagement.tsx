@@ -132,7 +132,17 @@ function GeneralSection({ data, editing, setData, editButton }: SectionProps) {
             <Badge variant="outline" className="bg-emerald-100 text-emerald-700 border-emerald-200">Thuê bao: Đang hoạt động</Badge>
           </div>
         </div>
-        {editButton}
+        <div className="flex items-center gap-2">
+          <Button
+            size="icon"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground"
+            onClick={() => toast.info('Thêm hồ sơ công ty mới (demo)')}
+            title="Thêm hồ sơ công ty mới"
+          >
+            <Plus className="h-5 w-5" />
+          </Button>
+          {editButton}
+        </div>
       </div>
       <Card>
         <CardHeader><CardTitle className="text-lg">Thông tin chung</CardTitle></CardHeader>
