@@ -59,6 +59,17 @@ export interface PaymentInfo {
 export type OnboardingStatus = 'completed' | 'in_progress' | 'pending';
 export type SubscriptionStatus = 'active' | 'suspended' | 'inactive';
 
+// Service Profile types
+export interface ServiceProfile {
+  id: string;
+  name: string;
+  serviceModel: 'AX' | 'AXB';
+  phoneNumbers: string[];
+  dailyCallLimit: number;
+  apiKeys: { id: string; key: string; createdAt: string; status: 'active' | 'revoked' }[];
+  logRetentionDays: number;
+}
+
 export interface CustomerData {
   general: CustomerGeneral;
   legal: CustomerLegal;
@@ -69,6 +80,7 @@ export interface CustomerData {
   payment: PaymentInfo;
   onboardingStatus: OnboardingStatus;
   subscriptionStatus: SubscriptionStatus;
+  serviceProfiles?: ServiceProfile[];
 }
 
 // Report types

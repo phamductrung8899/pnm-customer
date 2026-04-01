@@ -1,4 +1,4 @@
-import type { CustomerData, Ticket } from '@/types/customer';
+import type { CustomerData, Ticket, ServiceProfile } from '@/types/customer';
 
 export interface AdminCustomer {
   id: string;
@@ -6,6 +6,60 @@ export interface AdminCustomer {
   phone: string;
   data: CustomerData;
 }
+
+const serviceProfilesABC: ServiceProfile[] = [
+  {
+    id: 'sp-001',
+    name: 'Hồ sơ TMĐT - AX',
+    serviceModel: 'AX',
+    phoneNumbers: ['1900xxxx01', '1900xxxx02', '1900xxxx03'],
+    dailyCallLimit: 200,
+    apiKeys: [
+      { id: 'ak-1', key: 'pk_live_abc123456789', createdAt: '01/06/2024', status: 'active' },
+      { id: 'ak-2', key: 'pk_live_abc987654321', createdAt: '15/08/2024', status: 'active' },
+    ],
+    logRetentionDays: 90,
+  },
+  {
+    id: 'sp-002',
+    name: 'Hồ sơ Giao hàng - AXB',
+    serviceModel: 'AXB',
+    phoneNumbers: ['1900xxxx04', '1900xxxx05'],
+    dailyCallLimit: 150,
+    apiKeys: [
+      { id: 'ak-3', key: 'pk_live_def456789012', createdAt: '01/09/2024', status: 'active' },
+    ],
+    logRetentionDays: 60,
+  },
+];
+
+const serviceProfilesXYZ: ServiceProfile[] = [
+  {
+    id: 'sp-003',
+    name: 'Hồ sơ Vận tải - AXB',
+    serviceModel: 'AXB',
+    phoneNumbers: ['1900xxxx10', '1900xxxx11'],
+    dailyCallLimit: 200,
+    apiKeys: [
+      { id: 'ak-4', key: 'pk_live_xyz111222333', createdAt: '01/09/2024', status: 'active' },
+    ],
+    logRetentionDays: 30,
+  },
+];
+
+const serviceProfilesDEF: ServiceProfile[] = [
+  {
+    id: 'sp-004',
+    name: 'Hồ sơ BĐS - AX',
+    serviceModel: 'AX',
+    phoneNumbers: ['1900xxxx20'],
+    dailyCallLimit: 100,
+    apiKeys: [
+      { id: 'ak-5', key: 'pk_live_def999888777', createdAt: '15/12/2024', status: 'active' },
+    ],
+    logRetentionDays: 90,
+  },
+];
 
 export const mockAdminCustomers: AdminCustomer[] = [
   {
@@ -53,6 +107,7 @@ export const mockAdminCustomers: AdminCustomer[] = [
       payment: { companyName: 'Công ty CP Công nghệ ABC', taxCode: '0108456789', invoiceAddress: 'Tầng 12, Tòa nhà Landmark, 72 Nguyễn Trãi, Thanh Xuân, Hà Nội', invoiceEmail: 'ketoan@abctech.vn', billingCycle: 'Hàng tháng', paymentMethod: 'Chuyển khoản ngân hàng' },
       onboardingStatus: 'completed',
       subscriptionStatus: 'active',
+      serviceProfiles: serviceProfilesABC,
     },
   },
   {
@@ -97,6 +152,7 @@ export const mockAdminCustomers: AdminCustomer[] = [
       payment: { companyName: 'Công ty TNHH Vận tải XYZ', taxCode: '0315678901', invoiceAddress: '123 Lê Lợi, Quận 1, TP. HCM', invoiceEmail: 'ketoan@xyztransport.vn', billingCycle: 'Hàng tháng', paymentMethod: 'Chuyển khoản ngân hàng' },
       onboardingStatus: 'completed',
       subscriptionStatus: 'active',
+      serviceProfiles: serviceProfilesXYZ,
     },
   },
   {
@@ -141,6 +197,7 @@ export const mockAdminCustomers: AdminCustomer[] = [
       payment: { companyName: 'Công ty CP Bất động sản DEF', taxCode: '0316789012', invoiceAddress: 'Tầng 8, Pearl Plaza, TP. HCM', invoiceEmail: 'ketoan@defrealty.vn', billingCycle: 'Hàng quý', paymentMethod: 'Chuyển khoản ngân hàng' },
       onboardingStatus: 'in_progress',
       subscriptionStatus: 'active',
+      serviceProfiles: serviceProfilesDEF,
     },
   },
 ];
